@@ -1,7 +1,7 @@
 import React from 'react';
-import {Text} from 'react-native';
+import { Text } from 'react-native';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <>
       <Text>Nothing</Text>
