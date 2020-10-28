@@ -27,7 +27,7 @@ const Home: React.FC = () => {
         />
       </Header>
       <Content>
-        <ContentCard>
+        <ContentCard type="week">
           <TopContent>
             <Counter>4</Counter>
             <Icon name="assignment" size={26} color="#fff" />
@@ -37,9 +37,9 @@ const Home: React.FC = () => {
             <Icon name="chevron-right" size={26} color="#fff" />
           </BottomContent>
         </ContentCard>
-        <ContentCard style={{ backgroundColor: '#6F4FA2' }}>
+        <ContentCard type="to-receive">
           <TopContent>
-            <Counter>6</Counter>
+            <Counter>4</Counter>
             <Icon name="attach-money" size={26} color="#fff" />
           </TopContent>
           <BottomContent>

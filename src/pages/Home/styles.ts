@@ -1,4 +1,9 @@
+import { RectButton } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
+
+interface ContentCardProps {
+  type: 'to-receive' | 'week';
+}
 
 export const Container = styled.View`
   padding: 16px;
@@ -29,10 +34,10 @@ export const Content = styled.View`
   align-items: center;
 `;
 
-export const ContentCard = styled.View`
+export const ContentCard = styled(RectButton)<ContentCardProps>`
   width: 320px;
   height: 153px;
-  background: #ff7474;
+  background: ${props => (props.type === 'to-receive' ? '#6F4FA2' : '#FF7474')};
   border-radius: 6px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding: 20px 16px;
