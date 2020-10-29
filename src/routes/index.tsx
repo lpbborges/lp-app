@@ -3,7 +3,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import Home from '../pages/Home';
-import MyCustomers from '../pages/MyCustomers';
+import MyCustomersStack from './myCustomersStack.routes';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -16,13 +16,13 @@ const Routes: React.FC = () => (
   >
     <Tab.Screen
       options={{
-        tabBarLabel: 'Clientes',
+        tabBarLabel: 'Meus clientes',
         tabBarIcon: ({ color }) => (
           <MaterialIcons name="assignment-ind" size={26} color={color} />
         ),
       }}
-      name="MyCustomers"
-      component={MyCustomers}
+      name="MyCustomersStack"
+      component={MyCustomersStack}
     />
     <Tab.Screen
       options={{

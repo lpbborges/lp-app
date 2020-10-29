@@ -4,13 +4,11 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  margin-top: 32px;
-  padding: 0 0 0 28px;
+  margin-top: 28px;
 `;
 
 export const CustomerItem = styled(Pressable)`
-  padding: 8px;
-  margin-bottom: 16px;
+  padding: 12px 0 12px 36px;
 `;
 
 export const Name = styled.Text`
