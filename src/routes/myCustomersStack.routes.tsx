@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import MyCustomers from '../pages/MyCustomers';
+import Customer from '../pages/Customer';
 
 const Stack = createStackNavigator();
 
@@ -13,12 +14,12 @@ const MyCustomersStack: React.FC = () => (
       headerStyle: {
         backgroundColor: '#000',
       },
-      headerTitleStyle: {
-        marginLeft: 20,
-      },
-      headerRightContainerStyle: {
-        marginRight: 20,
-      },
+      // headerTitleStyle: {
+      //   marginLeft: 20,
+      // },
+      // headerRightContainerStyle: {
+      //   marginRight: 20,
+      // },
       headerTintColor: '#fff',
     }}
   >
@@ -26,6 +27,11 @@ const MyCustomersStack: React.FC = () => (
       options={{ headerShown: false }}
       name="MyCustomers"
       component={MyCustomers}
+    />
+    <Stack.Screen
+      options={{ title: 'Cliente' }}
+      name="Customer"
+      component={Customer}
     />
   </Stack.Navigator>
 );

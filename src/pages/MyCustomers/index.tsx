@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
@@ -54,6 +55,12 @@ const data = [
 ];
 
 const MyCustomers: React.FC = () => {
+  const { navigate } = useNavigation();
+
+  const navigateToCustomer = useCallback(() => {
+    navigate('Customer');
+  }, [navigate]);
+
   return (
     <Container>
       <FlatList
@@ -64,6 +71,7 @@ const MyCustomers: React.FC = () => {
             android_ripple={{
               color: '#6f4fa2',
             }}
+            onPress={navigateToCustomer}
           >
             <Name>{customer.name}</Name>
             <PhoneNumber>{customer.phone}</PhoneNumber>
@@ -71,7 +79,7 @@ const MyCustomers: React.FC = () => {
         )}
         keyExtractor={item => item.id}
       />
-      <NewCustomerButton>
+      <NewCustomerButton onPress={navigateToCustomer}>
         <Icon name="add" color="#fff" size={26} />
       </NewCustomerButton>
     </Container>
