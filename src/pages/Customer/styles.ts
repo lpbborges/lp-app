@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   flex: 1;
   padding: 50px 28px 50px 36px;
+  justify-content: center;
   align-items: center;
 `;
 
