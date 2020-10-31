@@ -1,46 +1,54 @@
 import React from 'react';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { createStackNavigator } from '@react-navigation/stack';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
-import Home from '../pages/Home';
-import MyCustomersStack from './myCustomersStack.routes';
+import Customer from '../pages/Customer';
+import HomeTabs from './homeTabs.routes';
 
-const Tab = createMaterialBottomTabNavigator();
+const Stack = createStackNavigator();
+
+function hideHeaderBar(route: any) {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
+
+  if (routeName !== 'MyCustomers') return false;
+  return true;
+}
+
+function getHeaderTitle(route: any) {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
+
+  switch (routeName) {
+    case 'MyCustomers':
+      return 'Meus clientes';
+    default:
+      return 'Home';
+  }
+}
 
 const Routes: React.FC = () => (
-  <Tab.Navigator
-    initialRouteName="Home"
-    activeColor="#FDFBFB"
-    barStyle={styles.barStyle}
-    shifting
+  <Stack.Navigator
+    initialRouteName="HomeTabs"
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: '#000',
+      },
+      headerTintColor: '#fff',
+    }}
   >
-    <Tab.Screen
-      options={{
-        tabBarLabel: 'Meus clientes',
-        tabBarIcon: ({ color }) => (
-          <MaterialIcons name="assignment-ind" size={26} color={color} />
-        ),
-      }}
-      name="MyCustomersStack"
-      component={MyCustomersStack}
+    <Stack.Screen
+      options={({ route }) => ({
+        headerShown: hideHeaderBar(route),
+        headerTitle: getHeaderTitle(route),
+      })}
+      name="HomeTabs"
+      component={HomeTabs}
     />
-    <Tab.Screen
-      options={{
-        tabBarLabel: 'Home',
-        tabBarIcon: ({ color }) => (
-          <MaterialIcons name="home" size={26} color={color} />
-        ),
-      }}
-      name="Home"
-      component={Home}
+    <Stack.Screen
+      options={{ headerShown: true, title: 'Cliente' }}
+      name="Customer"
+      component={Customer}
     />
-  </Tab.Navigator>
+  </Stack.Navigator>
 );
-
-const styles = {
-  barStyle: {
-    backgroundColor: '#000',
-  },
-};
 
 export default Routes;
