@@ -1,16 +1,15 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Avatar } from 'react-native-paper';
 
 import {
   Container,
   Header,
   WelcomeText,
-  Avatar,
   Content,
-  ContentCard,
-  TopContent,
+  CardContainer,
+  CardContent,
   Counter,
-  BottomContent,
   Description,
 } from './styles';
 
@@ -19,7 +18,8 @@ const Home: React.FC = () => {
     <Container>
       <Header>
         <WelcomeText>Bem vindo, John Doe</WelcomeText>
-        <Avatar
+        <Avatar.Image
+          size={54}
           source={{
             uri:
               'https://static.wikia.nocookie.net/evangelion/images/3/31/Bardiel_closeup.png/revision/latest?cb=20120312043054',
@@ -27,26 +27,26 @@ const Home: React.FC = () => {
         />
       </Header>
       <Content>
-        <ContentCard type="week">
-          <TopContent>
+        <CardContainer type="week" onPress={() => console.log('')}>
+          <CardContent>
             <Counter>4</Counter>
             <Icon name="assignment" size={26} color="#fff" />
-          </TopContent>
-          <BottomContent>
+          </CardContent>
+          <CardContent>
             <Description>Agendamentos para esta semana</Description>
             <Icon name="chevron-right" size={26} color="#fff" />
-          </BottomContent>
-        </ContentCard>
-        <ContentCard type="to-receive">
-          <TopContent>
-            <Counter>4</Counter>
+          </CardContent>
+        </CardContainer>
+        <CardContainer type="to-receive" onPress={() => console.log('')}>
+          <CardContent>
+            <Counter>6</Counter>
             <Icon name="attach-money" size={26} color="#fff" />
-          </TopContent>
-          <BottomContent>
+          </CardContent>
+          <CardContent>
             <Description>Agendamentos com pagamento pendente</Description>
             <Icon name="chevron-right" size={26} color="#fff" />
-          </BottomContent>
-        </ContentCard>
+          </CardContent>
+        </CardContainer>
       </Content>
     </Container>
   );

@@ -1,4 +1,5 @@
 import { RectButton } from 'react-native-gesture-handler';
+import { Paragraph, Title, Text } from 'react-native-paper';
 import styled from 'styled-components/native';
 
 interface ContentCardProps {
@@ -16,17 +17,10 @@ export const Header = styled.View`
   align-items: center;
 `;
 
-export const WelcomeText = styled.Text`
-  font-family: 'Roboto';
-  font-size: 20px;
+export const WelcomeText = styled(Title)`
+  font-family: 'Roboto, sans-serif';
   font-weight: 700;
   color: #fff;
-`;
-
-export const Avatar = styled.Image`
-  width: 54px;
-  height: 54px;
-  border-radius: 27px;
 `;
 
 export const Content = styled.View`
@@ -34,41 +28,32 @@ export const Content = styled.View`
   align-items: center;
 `;
 
-export const ContentCard = styled(RectButton)<ContentCardProps>`
+export const CardContainer = styled(RectButton)<ContentCardProps>`
   width: 320px;
   height: 153px;
   background: ${props => (props.type === 'to-receive' ? '#6F4FA2' : '#FF7474')};
   border-radius: 6px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  padding: 20px 16px;
   margin-bottom: 16px;
+  padding: 20px 24px;
 `;
 
-export const TopContent = styled.View`
+export const CardContent = styled.View`
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 `;
 
-export const Counter = styled.Text`
+export const Counter = styled(Text)`
+  font-family: 'Roboto, sans-serif';
   font-size: 48px;
   font-weight: 700;
   color: #fff;
 `;
 
-export const BottomContent = styled.View`
-  margin-top: 8px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const Description = styled.Text`
+export const Description = styled(Paragraph)`
   flex: 1;
-  flex-wrap: wrap;
+  font-family: 'Roboto, sans-serif';
   font-size: 14px;
   font-weight: 500;
-  line-height: 16px;
   color: #fff;
-  margin-right: 16px;
 `;
