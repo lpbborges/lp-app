@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "lint-staged": {
-    "*.ts": ["eslint --fix", "prettier --write", "tsc -p", "jest --bail --findRelatedTests"]
+    "*.{ts,tsx}": ["eslint --fix", "prettier --write", "tsc -p", "yarn test --bail --findRelatedTests"]
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
