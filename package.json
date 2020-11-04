@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "lint-staged": {
-    "*.{ts,tsx}": ["eslint --cache --fix"]
+    "*.{ts,tsx}": ["eslint --fix", "prettier --write"]
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",

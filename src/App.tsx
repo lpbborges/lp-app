@@ -11,10 +11,7 @@ const App: React.FC = () => {
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer theme={theme}>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor={theme.colors.background}
-        />
+        <StatusBar barStyle="light-content" backgroundColor="#000" />
         <Routes />
       </NavigationContainer>
     </PaperProvider>
