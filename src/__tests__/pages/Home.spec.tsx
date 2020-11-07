@@ -14,7 +14,7 @@ jest.mock('@react-navigation/native', () => {
 });
 
 describe('Home page', () => {
-  it('should be able to go to Schedules page when a card is pressed', () => {
+  it('should be able to go to Schedules page when any card is pressed', () => {
     const { getByTestId } = render(<Home />);
 
     fireEvent.press(getByTestId('week-schedules'));
