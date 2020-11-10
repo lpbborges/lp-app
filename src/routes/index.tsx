@@ -2,7 +2,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
-import Customer from '../pages/Customer';
+import EditCustomer from '../pages/Customer/EditCustomer';
+import NewCustomer from '../pages/Customer/NewCustomer';
 import HomeTabs from './homeTabs.routes';
 
 const Stack = createStackNavigator();
@@ -44,9 +45,14 @@ const Routes: React.FC = () => (
       component={HomeTabs}
     />
     <Stack.Screen
-      options={{ headerShown: true, title: 'Cliente' }}
-      name="Customer"
-      component={Customer}
+      options={{ headerShown: true, title: 'Novo Cliente' }}
+      name="NewCustomer"
+      component={NewCustomer}
+    />
+    <Stack.Screen
+      options={{ headerShown: true, title: 'Editar Cliente' }}
+      name="EditCustomer"
+      component={EditCustomer}
     />
   </Stack.Navigator>
 );

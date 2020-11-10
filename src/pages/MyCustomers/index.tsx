@@ -1,7 +1,11 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Results } from 'realm';
+import { MaskService } from 'react-native-masked-text';
+
+import getRealm from '../../services/realm';
 
 import {
   Container,
@@ -11,70 +15,49 @@ import {
   NewCustomerButton,
 } from './styles';
 
-const data = [
-  {
-    id: '1',
-    name: 'John Doe',
-    phone: '17998547912',
-  },
-  {
-    id: '2',
-    name: 'John Doe',
-    phone: '17998547912',
-  },
-  {
-    id: '3',
-    name: 'John Doe',
-    phone: '17998547912',
-  },
-  {
-    id: '4',
-    name: 'John Doe',
-    phone: '17998547912',
-  },
-  {
-    id: '12',
-    name: 'John Doe',
-    phone: '17998547912',
-  },
-  {
-    id: '22',
-    name: 'John Doe',
-    phone: '17998547912',
-  },
-  {
-    id: '31',
-    name: 'John Doe',
-    phone: '17998547912',
-  },
-  {
-    id: '41',
-    name: 'John Doe',
-    phone: '17998547912',
-  },
-];
+import Customer from '../../entities/Customer';
 
 const MyCustomers: React.FC = () => {
+  const [customers, setCustomers] = useState<Results<Customer>>();
+
   const { navigate } = useNavigation();
+  const { toMask } = MaskService;
+
+  useFocusEffect(() => {
+    async function loadCustomers() {
+      const realm = await getRealm();
+
+      const data = realm.objects<Customer>('Customer').sorted('name', false);
+
+      if (data) setCustomers(data);
+    }
+    loadCustomers();
+  });
 
   const navigateToCustomer = useCallback(() => {
-    navigate('Customer');
+    navigate('NewCustomer');
   }, [navigate]);
 
   return (
     <Container>
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={data}
+        data={customers}
         renderItem={({ item: customer }) => (
           <CustomerItem
             android_ripple={{
               color: '#6f4fa2',
             }}
-            onPress={navigateToCustomer}
+            onPress={() => navigate('EditCustomer', { id: customer.id })}
           >
             <Name>{customer.name}</Name>
-            <PhoneNumber>{customer.phone}</PhoneNumber>
+            <PhoneNumber>
+              {toMask('cel-phone', customer.telephone, {
+                maskType: 'BRL',
+                dddMask: '(99)',
+                withDDD: true,
+              })}
+            </PhoneNumber>
           </CustomerItem>
         )}
         keyExtractor={item => item.id}
