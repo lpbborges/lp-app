@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Results } from 'realm';
+import { MaskService } from 'react-native-masked-text';
 
 import getRealm from '../../services/realm';
 
@@ -20,8 +21,9 @@ const MyCustomers: React.FC = () => {
   const [customers, setCustomers] = useState<Results<Customer>>();
 
   const { navigate } = useNavigation();
+  const { toMask } = MaskService;
 
-  useEffect(() => {
+  useFocusEffect(() => {
     async function loadCustomers() {
       const realm = await getRealm();
 
@@ -29,9 +31,8 @@ const MyCustomers: React.FC = () => {
 
       if (data) setCustomers(data);
     }
-
     loadCustomers();
-  }, []);
+  });
 
   const navigateToCustomer = useCallback(() => {
     navigate('NewCustomer');
@@ -50,7 +51,13 @@ const MyCustomers: React.FC = () => {
             onPress={() => navigate('EditCustomer', { id: customer.id })}
           >
             <Name>{customer.name}</Name>
-            <PhoneNumber>{customer.telephone}</PhoneNumber>
+            <PhoneNumber>
+              {toMask('cel-phone', customer.telephone, {
+                maskType: 'BRL',
+                dddMask: '(99)',
+                withDDD: true,
+              })}
+            </PhoneNumber>
           </CustomerItem>
         )}
         keyExtractor={item => item.id}
