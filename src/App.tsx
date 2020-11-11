@@ -6,16 +6,19 @@ import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
 import theme from './themes/theme';
+import AppProvider from './hooks';
 import Routes from './routes';
 
 const App: React.FC = () => {
   return (
-    <PaperProvider theme={theme}>
-      <NavigationContainer theme={theme}>
-        <StatusBar barStyle="light-content" backgroundColor="#000" />
-        <Routes />
-      </NavigationContainer>
-    </PaperProvider>
+    <AppProvider>
+      <PaperProvider theme={theme}>
+        <NavigationContainer theme={theme}>
+          <StatusBar barStyle="light-content" backgroundColor="#000" />
+          <Routes />
+        </NavigationContainer>
+      </PaperProvider>
+    </AppProvider>
   );
 };
 

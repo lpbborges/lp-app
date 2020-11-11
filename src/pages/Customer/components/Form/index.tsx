@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Realm from 'realm';
 import { MaskService, TextInputMaskOptionProp } from 'react-native-masked-text';
 
+import { Snackbar } from 'react-native-paper';
 import Customer from '../../../../entities/Customer';
 import getRealm from '../../../../services/realm';
 import {
@@ -29,11 +30,11 @@ const maskProps: TextInputMaskOptionProp = {
 const Form: React.FC<FormProps> = ({ customer }) => {
   const emailRef = useRef<TextInput>(null);
   const telephoneRef = useRef<TextInput>(null);
+  const [showSnack, setShowSnack] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [telephone, setTelephone] = useState('');
   const { goBack } = useNavigation();
-
   const { toMask, toRawValue } = MaskService;
 
   useEffect(() => {
@@ -68,9 +69,9 @@ const Form: React.FC<FormProps> = ({ customer }) => {
         realm.create('Customer', data, Realm.UpdateMode.Modified);
       });
 
-      Alert.alert(`Cliente ${customer ? 'atualizado' : 'criado'} com sucesso!`);
-
-      goBack();
+      // Alert.alert(`Cliente ${customer ? 'atualizado' : 'criado'} com sucesso!`);
+      setShowSnack(true);
+      // goBack();
     } catch (err) {
       Alert.alert(
         `Falha ao ${customer ? 'atualizar' : 'criar'} cliente`,
@@ -79,7 +80,7 @@ const Form: React.FC<FormProps> = ({ customer }) => {
         } o cliente, verifique e tente novamente`,
       );
     }
-  }, [customer, email, goBack, name, telephone, toRawValue]);
+  }, [customer, email, name, telephone, toRawValue]);
 
   return (
     <KeyboardAvoidingView
@@ -124,6 +125,22 @@ const Form: React.FC<FormProps> = ({ customer }) => {
             Cancelar
           </CancelButton>
         </Container>
+        <Snackbar
+          visible={showSnack}
+          onDismiss={() => setShowSnack(false)}
+          style={styles.snackSuccess}
+          theme={{
+            colors: {
+              accent: '#fff',
+            },
+          }}
+          action={{
+            label: 'Voltar',
+            onPress: () => goBack(),
+          }}
+        >
+          {`Cliente ${customer ? 'atualizado' : 'criado'}`}
+        </Snackbar>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -132,6 +149,9 @@ const Form: React.FC<FormProps> = ({ customer }) => {
 const styles = {
   container: {
     flex: 1,
+  },
+  snackSuccess: {
+    backgroundColor: '#32cd32',
   },
 };
 
