@@ -2,6 +2,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
+import Header from '../components/Header';
+
 import EditCustomer from '../pages/Customer/EditCustomer';
 import NewCustomer from '../pages/Customer/NewCustomer';
 import HomeTabs from './homeTabs.routes';
@@ -40,6 +42,7 @@ const Routes: React.FC = () => (
       options={({ route }) => ({
         headerShown: hideHeaderBar(route),
         headerTitle: getHeaderTitle(route),
+        header: props => <Header title={getHeaderTitle(route)} {...props} />,
       })}
       name="HomeTabs"
       component={HomeTabs}

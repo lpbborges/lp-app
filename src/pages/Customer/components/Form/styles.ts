@@ -45,10 +45,11 @@ export const ConcludeButton = styled(Button).attrs({
   },
   contentStyle: {
     height: 36,
-    width: 188,
     borderRadius: 2,
   },
-})``;
+})`
+  width: 100%;
+`;
 
 export const CancelButton = styled(Button).attrs({
   upperCase: true,
@@ -61,9 +62,10 @@ export const CancelButton = styled(Button).attrs({
   },
   contentStyle: {
     height: 36,
-    width: 188,
     borderRadius: 2,
     borderWidth: 1,
     borderColor: '#fff',
   },
-})``;
+})`
+  width: 100%;
+`;

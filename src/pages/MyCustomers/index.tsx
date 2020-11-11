@@ -1,9 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Results } from 'realm';
 import { MaskService } from 'react-native-masked-text';
+
+import { useSearch } from '../../hooks/search';
 
 import getRealm from '../../services/realm';
 
@@ -22,17 +24,23 @@ const MyCustomers: React.FC = () => {
 
   const { navigate } = useNavigation();
   const { toMask } = MaskService;
+  const { query } = useSearch();
+  const isFocused = useIsFocused();
 
-  useFocusEffect(() => {
-    async function loadCustomers() {
+  useEffect(() => {
+    async function getFilteredCustomers() {
       const realm = await getRealm();
 
-      const data = realm.objects<Customer>('Customer').sorted('name', false);
+      const data = realm
+        .objects<Customer>('Customer')
+        .filtered(`name BEGINSWITH "${query}"`)
+        .sorted('name', false);
 
       if (data) setCustomers(data);
     }
-    loadCustomers();
-  });
+
+    getFilteredCustomers();
+  }, [query, isFocused]);
 
   const navigateToCustomer = useCallback(() => {
     navigate('NewCustomer');
