@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Appbar, Searchbar } from 'react-native-paper';
+import { Appbar, Searchbar, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
 
@@ -14,6 +14,7 @@ const Header: React.FC<HeaderProps> = props => {
   const { query, setQuery } = useSearch();
 
   const { goBack } = useNavigation();
+  const { colors } = useTheme();
   const { previous, title } = props;
 
   const handleIconPress = useCallback(() => {
@@ -21,20 +22,32 @@ const Header: React.FC<HeaderProps> = props => {
     setSearchBarActive(false);
   }, [setQuery]);
 
+  const styles = {
+    container: {
+      backgroundColor: colors.primary,
+    },
+    input: {
+      backgroundColor: colors.primary,
+      color: colors.surface,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.surface,
+    },
+  };
+
   return (
     <Appbar.Header>
       {searchBarActive ? (
         <Searchbar
           onIconPress={handleIconPress}
           icon="arrow-left"
-          iconColor="#fff"
+          iconColor={colors.text}
           inputStyle={styles.input}
           style={styles.container}
           theme={{
             colors: {
-              primary: '#6f4fa2',
-              accent: '#000',
-              placeholder: '#ffffff40',
+              primary: colors.accent,
+              accent: colors.primary,
+              placeholder: colors.placeholder,
             },
           }}
           placeholder="Procurar por nome..."
@@ -47,25 +60,13 @@ const Header: React.FC<HeaderProps> = props => {
           <Appbar.Content title={title} />
           <Appbar.Action
             icon="magnify"
-            color="#fff"
+            color={colors.text}
             onPress={() => setSearchBarActive(true)}
           />
         </>
       )}
     </Appbar.Header>
   );
-};
-
-const styles = {
-  container: {
-    backgroundColor: '#000',
-  },
-  input: {
-    backgroundColor: '#000',
-    color: '#ffffff73',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ffffff73',
-  },
 };
 
 export default Header;

@@ -4,6 +4,7 @@ import { useNavigation, useIsFocused } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Results } from 'realm';
 import { MaskService } from 'react-native-masked-text';
+import { useTheme } from 'react-native-paper';
 
 import { useSearch } from '../../hooks/search';
 
@@ -21,11 +22,11 @@ import Customer from '../../entities/Customer';
 
 const MyCustomers: React.FC = () => {
   const [customers, setCustomers] = useState<Results<Customer>>();
-
   const { navigate } = useNavigation();
   const { toMask } = MaskService;
   const { query } = useSearch();
   const isFocused = useIsFocused();
+  const { colors } = useTheme();
 
   useEffect(() => {
     async function getFilteredCustomers() {
@@ -54,7 +55,7 @@ const MyCustomers: React.FC = () => {
         renderItem={({ item: customer }) => (
           <CustomerItem
             android_ripple={{
-              color: '#6f4fa2',
+              color: colors.accent,
             }}
             onPress={() => navigate('EditCustomer', { id: customer.id })}
           >
@@ -71,7 +72,7 @@ const MyCustomers: React.FC = () => {
         keyExtractor={item => item.id}
       />
       <NewCustomerButton onPress={navigateToCustomer}>
-        <Icon name="add" color="#fff" size={26} />
+        <Icon name="add" color={colors.text} size={26} />
       </NewCustomerButton>
     </Container>
   );

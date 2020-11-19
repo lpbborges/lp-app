@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Avatar } from 'react-native-paper';
+import { Avatar, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import {
@@ -15,6 +15,7 @@ import {
 } from './styles';
 
 const Home: React.FC = () => {
+  const { colors } = useTheme();
   const { navigate } = useNavigation();
 
   return (
@@ -37,11 +38,11 @@ const Home: React.FC = () => {
         >
           <CardContent>
             <Counter>4</Counter>
-            <Icon name="assignment" size={26} color="#fff" />
+            <Icon name="assignment" size={26} color={colors.text} />
           </CardContent>
           <CardContent>
             <Description>Agendamentos para esta semana</Description>
-            <Icon name="chevron-right" size={26} color="#fff" />
+            <Icon name="chevron-right" size={26} color={colors.text} />
           </CardContent>
         </CardContainer>
 
@@ -52,11 +53,11 @@ const Home: React.FC = () => {
         >
           <CardContent>
             <Counter>6</Counter>
-            <Icon name="attach-money" size={26} color="#fff" />
+            <Icon name="attach-money" size={26} color={colors.text} />
           </CardContent>
           <CardContent>
             <Description>Agendamentos com pagamento pendente</Description>
-            <Icon name="chevron-right" size={26} color="#fff" />
+            <Icon name="chevron-right" size={26} color={colors.text} />
           </CardContent>
         </CardContainer>
       </Content>

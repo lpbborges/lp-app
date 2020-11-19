@@ -7,7 +7,7 @@ import Realm from 'realm';
 import { MaskService, TextInputMaskOptionProp } from 'react-native-masked-text';
 import * as Yup from 'yup';
 
-import { HelperText, Snackbar } from 'react-native-paper';
+import { HelperText, Snackbar, useTheme } from 'react-native-paper';
 import Customer from '../../../../entities/Customer';
 import getRealm from '../../../../services/realm';
 import {
@@ -46,6 +46,7 @@ const Form: React.FC<FormProps> = ({ customer }) => {
   const [errors, setErrors] = useState<ErrorsProps>({} as ErrorsProps);
   const { goBack } = useNavigation();
   const { toMask, toRawValue } = MaskService;
+  const { colors } = useTheme();
 
   useEffect(() => {
     if (customer) {
@@ -119,6 +120,18 @@ const Form: React.FC<FormProps> = ({ customer }) => {
       );
     }
   }, [customer, email, name, telephone, toRawValue]);
+
+  const styles = {
+    container: {
+      flex: 1,
+    },
+    snackSuccess: {
+      backgroundColor: colors.success,
+    },
+    errorText: {
+      color: colors.failure,
+    },
+  };
 
   return (
     <KeyboardAvoidingView
@@ -204,7 +217,7 @@ const Form: React.FC<FormProps> = ({ customer }) => {
           style={styles.snackSuccess}
           theme={{
             colors: {
-              accent: '#fff',
+              accent: colors.text,
             },
           }}
           action={{
@@ -217,18 +230,6 @@ const Form: React.FC<FormProps> = ({ customer }) => {
       </ScrollView>
     </KeyboardAvoidingView>
   );
-};
-
-const styles = {
-  container: {
-    flex: 1,
-  },
-  snackSuccess: {
-    backgroundColor: '#32cd32',
-  },
-  errorText: {
-    color: '#FF7474',
-  },
 };
 
 export default Form;
