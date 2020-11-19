@@ -1,5 +1,10 @@
+import { TextInputProps } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import styled from 'styled-components/native';
+
+interface InputProps extends TextInputProps {
+  isErrored: boolean;
+}
 
 export const Container = styled.View`
   flex: 1;
@@ -8,9 +13,13 @@ export const Container = styled.View`
   align-items: center;
 `;
 
-export const InputContainer = styled.View`
-  margin-bottom: 20px;
+export const Content = styled.View`
+  margin-bottom: 12px;
   width: 100%;
+`;
+
+export const InputContainer = styled.View`
+  margin-bottom: 28px;
 `;
 
 export const InputLabel = styled.Text`
@@ -19,20 +28,19 @@ export const InputLabel = styled.Text`
   line-height: 12px;
 `;
 
-export const Input = styled(TextInput).attrs({
-  underlineColor: '#ffffff73',
+export const Input = styled(TextInput).attrs<InputProps>(props => ({
+  underlineColor: props.isErrored ? '#FF7474' : '#ffffff73',
   mode: 'flat',
   theme: {
     colors: {
       primary: '#6f4fa2',
       text: '#ffffff73',
-      placeholder: '#fff',
+      placeholder: props.isErrored ? '#FF7474' : '#fff',
       background: 'transparent',
     },
   },
-})`
+}))<InputProps>`
   font-size: 14px;
-  margin-bottom: 32px;
 `;
 
 export const ConcludeButton = styled(Button).attrs({
