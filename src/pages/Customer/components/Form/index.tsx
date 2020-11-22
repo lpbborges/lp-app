@@ -46,7 +46,7 @@ const Form: React.FC<FormProps> = ({ customer }) => {
   const [errors, setErrors] = useState<ErrorsProps>({} as ErrorsProps);
   const { goBack } = useNavigation();
   const { toMask, toRawValue } = MaskService;
-  const { colors } = useTheme();
+  const theme = useTheme();
 
   useEffect(() => {
     if (customer) {
@@ -126,10 +126,10 @@ const Form: React.FC<FormProps> = ({ customer }) => {
       flex: 1,
     },
     snackSuccess: {
-      backgroundColor: colors.success,
+      backgroundColor: theme.colors.success,
     },
     errorText: {
-      color: colors.failure,
+      color: theme.colors.failure,
     },
   };
 
@@ -147,6 +147,7 @@ const Form: React.FC<FormProps> = ({ customer }) => {
                 value={name}
                 label="Nome"
                 isErrored={!!errors.name}
+                theme={theme}
                 returnKeyType="next"
                 onFocus={() => setErrors({ ...errors, name: '' })}
                 onSubmitEditing={() => {
@@ -167,6 +168,7 @@ const Form: React.FC<FormProps> = ({ customer }) => {
                 ref={emailRef}
                 value={email}
                 label="Email"
+                theme={theme}
                 isErrored={!!errors.email}
                 returnKeyType="next"
                 onFocus={() => setErrors({ ...errors, email: '' })}
@@ -190,6 +192,7 @@ const Form: React.FC<FormProps> = ({ customer }) => {
                 ref={telephoneRef}
                 value={telephone}
                 label="Telefone"
+                theme={theme}
                 isErrored={!!errors.telephone}
                 returnKeyType="done"
                 onFocus={() => setErrors({ ...errors, telephone: '' })}
@@ -204,20 +207,26 @@ const Form: React.FC<FormProps> = ({ customer }) => {
               </HelperText>
             </InputContainer>
           </Content>
-          <ConcludeButton onPress={handleConcludeButton} mode="contained">
+          <ConcludeButton
+            theme={theme}
+            onPress={handleConcludeButton}
+            mode="contained"
+          >
             Concluir
           </ConcludeButton>
-          <CancelButton onPress={() => goBack()} mode="outlined">
+          <CancelButton theme={theme} onPress={() => goBack()} mode="outlined">
             Cancelar
           </CancelButton>
         </Container>
         <Snackbar
           visible={showSnack}
+          duration={2000}
           onDismiss={() => setShowSnack(false)}
           style={styles.snackSuccess}
           theme={{
             colors: {
-              accent: colors.text,
+              surface: theme.colors.text,
+              accent: theme.colors.text,
             },
           }}
           action={{

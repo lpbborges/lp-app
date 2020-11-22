@@ -7,6 +7,7 @@ declare global {
     interface ThemeColors {
       success: string;
       failure: string;
+      subText: string;
     }
   }
 }
@@ -18,12 +19,13 @@ const defaultTheme = {
     ...PaperDefaultTheme.colors,
     ...NavigationDefaultTheme.colors,
     primary: '#000',
-    accent: '#6f4fa2',
+    accent: '#6F4FA2',
     background: '#121212',
-    surface: '#ffffff73',
+    surface: '#FFFFFF73',
     text: '#fff',
-    placeholder: '#ffffff40',
-    success: '#0f0',
+    subText: '#FFFFFFB3',
+    placeholder: '#FFFFFF40',
+    success: '#0F0',
     failure: '#FF7474',
   },
 };

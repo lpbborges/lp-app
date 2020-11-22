@@ -59,8 +59,8 @@ const MyCustomers: React.FC = () => {
             }}
             onPress={() => navigate('EditCustomer', { id: customer.id })}
           >
-            <Name>{customer.name}</Name>
-            <PhoneNumber>
+            <Name color={colors.text}>{customer.name}</Name>
+            <PhoneNumber color={colors.subText}>
               {toMask('cel-phone', customer.telephone, {
                 maskType: 'BRL',
                 dddMask: '(99)',
@@ -71,7 +71,7 @@ const MyCustomers: React.FC = () => {
         )}
         keyExtractor={item => item.id}
       />
-      <NewCustomerButton onPress={navigateToCustomer}>
+      <NewCustomerButton onPress={navigateToCustomer} color={colors.accent}>
         <Icon name="add" color={colors.text} size={26} />
       </NewCustomerButton>
     </Container>

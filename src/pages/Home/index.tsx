@@ -21,7 +21,7 @@ const Home: React.FC = () => {
   return (
     <Container>
       <Header>
-        <WelcomeText>Bem vindo, John Doe</WelcomeText>
+        <WelcomeText color={colors.text}>Bem vindo, John Doe</WelcomeText>
         <Avatar.Image
           size={54}
           source={{
@@ -33,30 +33,34 @@ const Home: React.FC = () => {
       <Content>
         <CardContainer
           testID="week-schedules"
-          type="week"
+          color={colors.failure}
           onPress={() => navigate('Schedules')}
         >
           <CardContent>
-            <Counter>4</Counter>
+            <Counter color={colors.text}>4</Counter>
             <Icon name="assignment" size={26} color={colors.text} />
           </CardContent>
           <CardContent>
-            <Description>Agendamentos para esta semana</Description>
+            <Description color={colors.text}>
+              Agendamentos para esta semana
+            </Description>
             <Icon name="chevron-right" size={26} color={colors.text} />
           </CardContent>
         </CardContainer>
 
         <CardContainer
           testID="to-receive-schedules"
-          type="to-receive"
+          color={colors.accent}
           onPress={() => navigate('Schedules')}
         >
           <CardContent>
-            <Counter>6</Counter>
+            <Counter color={colors.text}>6</Counter>
             <Icon name="attach-money" size={26} color={colors.text} />
           </CardContent>
           <CardContent>
-            <Description>Agendamentos com pagamento pendente</Description>
+            <Description color={colors.text}>
+              Agendamentos com pagamento pendente
+            </Description>
             <Icon name="chevron-right" size={26} color={colors.text} />
           </CardContent>
         </CardContainer>
