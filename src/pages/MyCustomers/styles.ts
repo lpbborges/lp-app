@@ -11,23 +11,23 @@ export const CustomerItem = styled(Pressable)`
   padding: 12px 0 12px 36px;
 `;
 
-export const Name = styled.Text`
-  color: #fff;
+export const Name = styled.Text<{ color: string }>`
+  color: ${props => props.color};
   margin-bottom: 8px;
   font-size: 14px;
 `;
 
-export const PhoneNumber = styled.Text`
-  color: rgba(255, 255, 255, 0.7);
+export const PhoneNumber = styled.Text<{ color: string }>`
+  color: ${props => props.color};
   font-size: 14px;
 `;
 
-export const NewCustomerButton = styled(RectButton)`
+export const NewCustomerButton = styled(RectButton)<{ color: string }>`
   align-items: center;
   justify-content: center;
   width: 50px;
   height: 50px;
-  background: #6f4fa2;
+  background: ${props => props.color};
   border-radius: 25px;
   position: absolute;
   margin: 16px;

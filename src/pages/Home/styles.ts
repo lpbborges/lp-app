@@ -2,10 +2,6 @@ import { RectButton } from 'react-native-gesture-handler';
 import { Paragraph, Title, Text } from 'react-native-paper';
 import styled from 'styled-components/native';
 
-interface ContentCardProps {
-  type: 'to-receive' | 'week';
-}
-
 export const Container = styled.View`
   padding: 16px;
 `;
@@ -17,10 +13,10 @@ export const Header = styled.View`
   align-items: center;
 `;
 
-export const WelcomeText = styled(Title)`
+export const WelcomeText = styled(Title)<{ color: string }>`
   font-family: 'Roboto, sans-serif';
   font-weight: 700;
-  color: #fff;
+  color: ${props => props.color};
 `;
 
 export const Content = styled.View`
@@ -28,10 +24,10 @@ export const Content = styled.View`
   align-items: center;
 `;
 
-export const CardContainer = styled(RectButton)<ContentCardProps>`
+export const CardContainer = styled(RectButton)<{ color: string }>`
   width: 320px;
   height: 153px;
-  background: ${props => (props.type === 'to-receive' ? '#6F4FA2' : '#FF7474')};
+  background: ${props => props.color};
   border-radius: 6px;
   margin-bottom: 16px;
   padding: 20px 24px;
@@ -43,17 +39,17 @@ export const CardContent = styled.View`
   justify-content: space-between;
 `;
 
-export const Counter = styled(Text)`
+export const Counter = styled(Text)<{ color: string }>`
   font-family: 'Roboto, sans-serif';
   font-size: 48px;
   font-weight: 700;
-  color: #fff;
+  color: ${props => props.color};
 `;
 
-export const Description = styled(Paragraph)`
+export const Description = styled(Paragraph)<{ color: string }>`
   flex: 1;
   font-family: 'Roboto, sans-serif';
   font-size: 14px;
   font-weight: 500;
-  color: #fff;
+  color: ${props => props.color};
 `;
