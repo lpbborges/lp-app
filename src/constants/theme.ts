@@ -45,27 +45,24 @@ interface FontConfig {
 const fontConfig: FontConfig = {
   default: {
     regular: {
-      fontFamily: 'Roboto',
-      fontWeight: '700',
+      fontFamily: 'Roboto-Regular',
     },
     medium: {
-      fontFamily: 'Roboto',
-      fontWeight: '500',
+      fontFamily: 'Roboto-Medium',
     },
     light: {
-      fontFamily: 'Roboto',
-      fontWeight: '400',
+      fontFamily: 'Roboto-Light',
     },
     thin: {
-      fontFamily: 'Roboto',
-      fontWeight: '300',
+      fontFamily: 'Roboto-Thin',
     },
   },
 };
 
-const defaultTheme = {
+const theme = {
   ...PaperDefaultTheme,
   ...NavigationDefaultTheme,
+  roundness: 2,
   colors: {
     ...PaperDefaultTheme.colors,
     ...NavigationDefaultTheme.colors,
@@ -82,4 +79,4 @@ const defaultTheme = {
   fonts: configureFonts(fontConfig),
 };
 
-export default defaultTheme;
+export default theme;

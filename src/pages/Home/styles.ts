@@ -1,28 +1,6 @@
 import { RectButton } from 'react-native-gesture-handler';
-import { Paragraph, Title, Text } from 'react-native-paper';
+import { Paragraph, Text } from 'react-native-paper';
 import styled from 'styled-components/native';
-
-export const Container = styled.View`
-  padding: 16px;
-`;
-
-export const Header = styled.View`
-  flex-direction: row;
-  margin-top: 20px;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const WelcomeText = styled(Title)<{ color: string }>`
-  font-family: 'Roboto, sans-serif';
-  font-weight: 700;
-  color: ${props => props.color};
-`;
-
-export const Content = styled.View`
-  margin-top: 24px;
-  align-items: center;
-`;
 
 export const CardContainer = styled(RectButton)<{ color: string }>`
   width: 320px;
