@@ -1,12 +1,11 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Avatar, useTheme } from 'react-native-paper';
+import { Avatar, Headline, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import {
   Container,
   Header,
-  WelcomeText,
   Content,
   CardContainer,
   CardContent,
@@ -21,7 +20,7 @@ const Home: React.FC = () => {
   return (
     <Container>
       <Header>
-        <WelcomeText color={colors.text}>Bem vindo, John Doe</WelcomeText>
+        <Headline>Bem vindo, John Doe</Headline>
         <Avatar.Image
           size={54}
           source={{
